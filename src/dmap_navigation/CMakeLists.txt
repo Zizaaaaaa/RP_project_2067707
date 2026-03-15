@@ -19,13 +19,13 @@ find_package(Eigen3 REQUIRED)
 # Include directories per Eigen e quelle testate
 include_directories(
   include
-  ${Eigen3_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
 )
 
 # definizione libreria core
 add_library(dmap_core
   src/dmap.cpp
-  # src/localizer.cpp (da aggiungere man mano)
+  src/localizer.cpp
   # src/planner.cpp
 )
 ament_target_dependencies(dmap_core
@@ -36,20 +36,25 @@ ament_target_dependencies(dmap_core
 add_executable(localizer_node src/localizer_node.cpp)
 target_link_libraries(localizer_node dmap_core)
 ament_target_dependencies(localizer_node
-  rclcpp nav_msgs sensor_msgs geometry_msgs tf2 tf2_ros
+  rclcpp 
+  nav_msgs 
+  sensor_msgs 
+  geometry_msgs 
+  tf2 
+  tf2_ros
 )
 
 # Nodo di Planning
-add_executable(planner_node src/planner_node.cpp)
-target_link_libraries(planner_node dmap_core)
-ament_target_dependencies(planner_node
-  rclcpp nav_msgs geometry_msgs
-)
+#add_executable(planner_node src/planner_node.cpp)
+#target_link_libraries(planner_node dmap_core)
+#ament_target_dependencies(planner_node
+#  rclcpp nav_msgs geometry_msgs
+#)
 
 install(TARGETS
   dmap_core
   localizer_node
-  planner_node
+#  planner_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
