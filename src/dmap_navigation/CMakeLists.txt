@@ -26,7 +26,7 @@ include_directories(
 add_library(dmap_core
   src/dmap.cpp
   src/localizer.cpp
-  # src/planner.cpp
+  src/planner.cpp
 )
 ament_target_dependencies(dmap_core
   Eigen3
@@ -42,19 +42,25 @@ ament_target_dependencies(localizer_node
   geometry_msgs 
   tf2 
   tf2_ros
+  tf2_geometry_msgs
 )
 
 # Nodo di Planning
-#add_executable(planner_node src/planner_node.cpp)
-#target_link_libraries(planner_node dmap_core)
-#ament_target_dependencies(planner_node
-#  rclcpp nav_msgs geometry_msgs
-#)
+add_executable(planner_node src/planner_node.cpp)
+target_link_libraries(planner_node dmap_core)
+ament_target_dependencies(planner_node
+  rclcpp 
+  nav_msgs 
+  geometry_msgs
+  tf2 
+  tf2_ros
+  tf2_geometry_msgs
+)
 
 install(TARGETS
   dmap_core
   localizer_node
-#  planner_node
+  planner_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
