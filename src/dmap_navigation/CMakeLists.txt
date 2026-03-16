@@ -64,4 +64,9 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+# Installa la cartella launch
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
 ament_package()

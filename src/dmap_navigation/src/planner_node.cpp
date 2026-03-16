@@ -39,7 +39,7 @@ private:
 
         geometry_msgs::msg::TransformStamped transform;
         try {
-            // Cerchiamo dove si trova il robot ORA rispetto alla mappa
+            //dove si trova il robot ORA rispetto alla mappa
             transform = _tf_buffer->lookupTransform("map", "base_link", tf2::TimePointZero);
         } catch (const tf2::TransformException & ex) {
             RCLCPP_ERROR(this->get_logger(), "Impossibile trovare posa robot: %s", ex.what());

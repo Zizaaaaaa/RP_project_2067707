@@ -1,0 +1,24 @@
+image: diag.png
+resolution: 0.1
+publish_robots_gt: true
+robots:
+  - name: robot_1
+    robot_in_world: [18, -25, 0]
+    robot_radius: 0.2
+    scanners:
+      - name: laser_1
+        scanner_in_robot: [0, 0, 0]
+        scanner_radius: 0.01
+        scanner_freq: 30
+  - name: robot_2
+    robot_in_world: [15, -50, 0]
+    robot_radius: 0.2
+    scanners:
+      - name: laser_2
+        scanner_in_robot: [1, 0, 0]
+        scanner_radius: 0.01
+        scanner_freq: 15
+      - name: laser_3
+        scanner_in_robot: [0, 0, -3.14]
+        scanner_radius: 0.01
+        scanner_freq: 15

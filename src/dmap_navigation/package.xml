@@ -3,7 +3,7 @@
   <name>dmap_navigation</name>
   <version>1.0.0</version>
   <description>DMap based Localization and Planning Project</description>
-  <maintainer email="student@studenti.uniroma1.it">User</maintainer>
+  <maintainer email="zezza.2067707@studenti.uniroma1.it">User</maintainer>
   <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
