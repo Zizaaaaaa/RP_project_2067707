@@ -13,6 +13,7 @@ struct PathNode {
 
 class Planner {
 public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     Planner(const DMap* dmap) : _dmap(dmap) {}
     //trova il path usando Dijkstra/A*
     std::vector<Eigen::Vector2f> plan(const Eigen::Vector2f& start, const Eigen::Vector2f& goal);

@@ -6,6 +6,7 @@
 #include "rp_commons/distance_map_utils.h"
 #include "rp_commons/grid.h"
 #include "rp_commons/grid_map.h"
+//map creation, calculates gradient and magnitude, publish
 
 class DistanceMapNode : public rclcpp::Node {
  public:

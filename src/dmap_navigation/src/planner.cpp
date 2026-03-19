@@ -6,13 +6,14 @@
 namespace dmap_navigation {
 
 float Planner::computeCost(int x, int y, bool diagonal) {
-    float dist = _dmap->getDistance(Eigen::Vector2f(x * 0.1, y * 0.1)); // Assumendo res 0.1
+    // Risoluzione unificata a 0.1
+    float dist = _dmap->getDistance(Eigen::Vector2f(x * 0.1f, y * 0.1f)); 
     float obstacle_cost = 0;
     
     float robot_radius = 0.3;    
     float influence_range = 1.0;
 
-    if (dist < robot_radius) return 1e6; //colpito ostacolo
+    if (dist < robot_radius) return 1e6; // colpito ostacolo
     
     if (dist < influence_range) {
         // Costo che aumenta linearmente avvicinandosi all'ostacolo
@@ -26,7 +27,7 @@ float Planner::computeCost(int x, int y, bool diagonal) {
 struct NodeRecord {
     int index;
     float cost_so_far;
-    //per ordinare dal costo più basso la prioriy queue
+    // per ordinare dal costo più basso la priority queue
     bool operator>(const NodeRecord& other) const {
         return cost_so_far > other.cost_so_far;
     }
@@ -35,17 +36,21 @@ struct NodeRecord {
 std::vector<Eigen::Vector2f> Planner::plan(const Eigen::Vector2f& start, const Eigen::Vector2f& goal) {
     std::vector<Eigen::Vector2f> path;
     
-    //assumo mappa 1000x1000 con risoluzione 0.05
-    int width = 1000; 
-    int height = 1000;
-    float res = 0.05;
+    // Le VERE dimensioni della mappa del DIAG e la VERA risoluzione
+    int width = 2138; 
+    int height = 987;
+    float res = 0.1f;
 
     int start_x = std::round(start.x() / res);
     int start_y = std::round(start.y() / res);
     int goal_x = std::round(goal.x() / res);
     int goal_y = std::round(goal.y() / res);
 
-    if (start_x < 0 || start_x >= width || goal_x < 0 || goal_x >= width) return path; // Fuori mappa
+    // Controllo di sicurezza COMPLETO (Sia X che Y)
+    if (start_x < 0 || start_x >= width || start_y < 0 || start_y >= height || 
+        goal_x < 0 || goal_x >= width || goal_y < 0 || goal_y >= height) {
+        return path; // Fuori mappa
+    }
 
     std::vector<float> min_cost(width * height, 1e9);
     std::vector<int> parent(width * height, -1);
@@ -85,7 +90,7 @@ std::vector<Eigen::Vector2f> Planner::plan(const Eigen::Vector2f& start, const E
                 int n_idx = ny * width + nx;
                 float transition_cost = computeCost(nx, ny, diag[i]);
                 
-                if (transition_cost >= 1e5) continue; //cella occupata
+                if (transition_cost >= 1e5) continue; // cella occupata
 
                 float new_cost = current.cost_so_far + transition_cost;
 
@@ -104,6 +109,8 @@ std::vector<Eigen::Vector2f> Planner::plan(const Eigen::Vector2f& start, const E
             int cx = curr % width;
             int cy = curr / width;
             path.push_back(Eigen::Vector2f(cx * res, cy * res));
+            
+            if (curr == start_idx) break; // Uscita di sicurezza aggiuntiva
             curr = parent[curr];
         }
         std::reverse(path.begin(), path.end());
@@ -112,5 +119,4 @@ std::vector<Eigen::Vector2f> Planner::plan(const Eigen::Vector2f& start, const E
     return path;
 }
 
-}
- //namespace
+} // namespace

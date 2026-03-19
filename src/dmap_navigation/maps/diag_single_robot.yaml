@@ -1,6 +1,6 @@
 image: diag.png
 resolution: 0.1
-publish_robots_gt: true
+publish_robots_gt: false
 robots:
   - name: robot_1
     robot_in_world: [18, -25, 0]

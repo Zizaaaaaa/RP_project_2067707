@@ -6,6 +6,7 @@ namespace dmap_navigation {
 
 class Localizer {
 public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     Localizer(const DMap* dmap) : _dmap(dmap) {}
 
     //n iterazioni di gauss-newton per trovare la posa giusta

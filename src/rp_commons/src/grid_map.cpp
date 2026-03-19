@@ -1,4 +1,5 @@
 #include "rp_commons/grid_map.h"
+//transforms the image into a grid of pixels
 
 GridMap::GridMap(int rows, int cols, float resolution)
     : Grid_<uint8_t>(rows, cols) {

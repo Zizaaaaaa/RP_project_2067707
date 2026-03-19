@@ -1,7 +1,7 @@
 #include "rp_commons/distance_map.h"
-
 #include <iostream>
 #include <queue>
+//for each cell of the distance map I use a pointer (parent) to the closest obstacle.
 
 void DistanceMap::loadFromOccupancyGrid(const nav_msgs::msg::OccupancyGrid& map,
                                         unsigned int d2_max) {

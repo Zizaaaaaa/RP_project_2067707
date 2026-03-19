@@ -13,6 +13,7 @@ struct Cell {
 
 class DMap {
 public:
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     DMap(int width, int height, float resolution);
     
     // Calcola la DMap partendo da una OccupancyGrid

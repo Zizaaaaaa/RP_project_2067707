@@ -1,0 +1,6 @@
+image: /mnt/c/Users/utente/Documents/GitHub/RP_project_2067707/src/dmap_navigation/maps/diag.png
+resolution: 0.1
+origin: [0.0, -98.7, 0.0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
